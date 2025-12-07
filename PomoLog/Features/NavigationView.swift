@@ -7,26 +7,24 @@
 
 import SwiftUI
 
-struct BottomTabView: View {
+struct NavigationView: View {
     @State private var selectedTab: Int = 0
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            TimerView()
+            GoalView()
                 .tabItem {
                     Image(systemName: "timer")
                     Text("타이머")
                 }
+                .tag(0)
             
             ReviewView()
                 .tabItem {
                     Image(systemName: "book")
                     Text("돌아보기")
                 }
+                .tag(1)
         }
     }
-}
-
-#Preview {
-    BottomTabView()
 }
