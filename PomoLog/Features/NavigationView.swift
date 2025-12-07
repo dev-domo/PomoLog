@@ -1,0 +1,30 @@
+//
+//  ContentView.swift
+//  PomoLog
+//
+//  Created by APPLE on 12/6/25.
+//
+
+import SwiftUI
+
+struct NavigationView: View {
+    @State private var selectedTab: Int = 0
+    
+    var body: some View {
+        TabView(selection: $selectedTab) {
+            GoalView()
+                .tabItem {
+                    Image(systemName: "timer")
+                    Text("타이머")
+                }
+                .tag(0)
+            
+            ReviewView()
+                .tabItem {
+                    Image(systemName: "book")
+                    Text("돌아보기")
+                }
+                .tag(1)
+        }
+    }
+}
