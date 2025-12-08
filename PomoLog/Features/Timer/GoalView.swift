@@ -68,10 +68,6 @@ struct GoalView: View {
         }
     }
 
-    private func moveTimer() {
-        
-    }
-
     private var canMoveTimer: Bool {
         !goal.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             && !csf.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
