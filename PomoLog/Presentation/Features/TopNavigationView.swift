@@ -7,17 +7,20 @@
 
 import SwiftUI
 
-struct NavigationView: View {
+struct TopNavigationView: View {
+    
     @State private var selectedTab: Int = 0
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            GoalView()
-                .tabItem {
-                    Image(systemName: "timer")
-                    Text("타이머")
-                }
-                .tag(0)
+            GoalView(selectTabAction: { index in
+                selectedTab = index
+            })
+            .tabItem {
+                Image(systemName: "timer")
+                Text("타이머")
+            }
+            .tag(0)
             
             ReviewView()
                 .tabItem {
