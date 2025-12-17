@@ -59,14 +59,3 @@ struct GoalPopUpView: View {
         .ignoresSafeArea(.all)
     }
 }
-
-#Preview {
-    @Previewable @State var showPopUp: Bool = true
-    
-    GoalPopUpView(
-        showPopUp: $showPopUp,
-        title: "안내",
-        message: "목표 메시지",
-        buttonTitle: "확인"
-    )
-}

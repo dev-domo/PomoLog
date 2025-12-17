@@ -45,11 +45,3 @@ struct PomodoroTimerView: View {
         }
     }
 }
-
-#Preview {
-    PomodoroTimerView(
-        cycle: .first,
-        focusStep: .focus, goal: "화이팅하기") { _ in
-            print()
-        }
-}

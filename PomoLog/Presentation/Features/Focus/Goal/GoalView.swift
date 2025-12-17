@@ -88,9 +88,3 @@ struct GoalView: View {
         && !csf.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 }
-
-#Preview {
-    GoalView { index in
-        print(index)
-    }
-}
