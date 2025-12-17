@@ -132,12 +132,3 @@ struct TimerView: View {
         timer = nil
     }
 }
-
-#Preview {
-    @Previewable @State var cycle: Cycle = .first
-    @Previewable @State var step: FocusStep = .focus
-    
-    TimerView(cycle: $cycle, focusStep: $step) { _ in
-        print()
-    }
-}

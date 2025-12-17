@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ProgressBarView: View {
     
+    @State private var showPopUp: Bool = false
     @Binding var cycle: Cycle
+    let goal: String
     
     var body: some View {
         HStack(spacing: 10) {
@@ -19,7 +21,6 @@ struct ProgressBarView: View {
                     .foregroundStyle(index <= cycle.rawValue ? .gray : .lightGray)
             }
         }
-        .frame(minWidth: 600, minHeight: 10, alignment: .center)
         .padding(.vertical, 10)
     }
 }
