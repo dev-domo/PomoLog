@@ -54,6 +54,7 @@ struct GoalView: View {
                         PomodoroTimerView(
                             cycle: .first,
                             focusStep: .focus,
+                            goal: $goal.wrappedValue,
                             selectTabAction: selectTabAction
                         )
                     } label: {

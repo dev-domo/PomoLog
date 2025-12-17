@@ -11,20 +11,36 @@ struct PomodoroTimerView: View {
     
     @State var cycle: Cycle
     @State var focusStep: FocusStep
+    @State var showPopUp: Bool = false
+    let goal: String
     let selectTabAction: (Int) -> Void
     
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
             
-            VStack {
-                ProgressBarView(cycle: $cycle)
-                FocusStepView(focusStep: $focusStep)
-                TimerView(
-                    cycle: $cycle,
-                    focusStep: $focusStep,
-                    selectTabAction: selectTabAction
-                )
+            ZStack {
+                VStack {
+                    HStack {
+                        ProgressBarView(cycle: $cycle, goal: goal)
+                        QuestionMarkView(showPopUp: $showPopUp, goal: goal)
+                    }
+                    FocusStepView(focusStep: $focusStep)
+                    TimerView(
+                        cycle: $cycle,
+                        focusStep: $focusStep,
+                        selectTabAction: selectTabAction
+                    )
+                }
+                
+                if showPopUp {
+                    GoalPopUpView(
+                        showPopUp: $showPopUp,
+                        title: "목표",
+                        message: goal,
+                        buttonTitle: "확인"
+                    )
+                }
             }
         }
     }
@@ -33,7 +49,7 @@ struct PomodoroTimerView: View {
 #Preview {
     PomodoroTimerView(
         cycle: .first,
-        focusStep: .focus) { _ in
+        focusStep: .focus, goal: "화이팅하기") { _ in
             print()
         }
 }
