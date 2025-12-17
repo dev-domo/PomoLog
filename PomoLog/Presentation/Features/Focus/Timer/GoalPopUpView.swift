@@ -39,7 +39,7 @@ struct GoalPopUpView: View {
                     showPopUp = false
                 }, label: {
                     Text(buttonTitle)
-                        .frame(width: 100)
+                        .frame(maxWidth: 100)
                         .contentShape(Rectangle())
                         .foregroundStyle(.white)
                         .padding(.vertical, 8)
@@ -50,6 +50,7 @@ struct GoalPopUpView: View {
                 .shadow(radius: 1)
                 .padding(.bottom, 12)
             }
+            .frame(maxWidth: 450)
             .background(.white)
             .cornerRadius(10)
             .padding(.horizontal, 20)
