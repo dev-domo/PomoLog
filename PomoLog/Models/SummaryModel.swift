@@ -15,8 +15,8 @@ final class SummaryModel: Object {
     var id: ObjectId = ObjectId.generate()
     
     @Persisted
-    var content: String = ""
+    var content: String
     
     @Persisted
-    var timestamp: Date = Date()
+    var timestamp: Date
 }

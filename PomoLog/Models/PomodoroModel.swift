@@ -18,20 +18,20 @@ final class PomodoroModel: Object {
     var id: ObjectId = ObjectId.generate()
     
     @Persisted
-    var goal: String = ""
+    var goal: String
     
     @Persisted
-    var csf: String = ""
+    var csf: String
     
     @Persisted
     var summaries: List<String>
     
     @Persisted
-    var timestamp: Date = Date()
+    var timestamp: Date
     
     @Persisted
-    var dateString: String = ""
+    var dateString: String
     
     @Persisted
-    var focusTime: Int = 0
+    var focusTime: Int
 }
