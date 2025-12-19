@@ -14,6 +14,8 @@ enum FocusStep: Int {
     case shortBreak
     case longBreak
     
+    static var focusTime: Int = 24
+    
     var title: String {
         switch self {
         case .focus:
