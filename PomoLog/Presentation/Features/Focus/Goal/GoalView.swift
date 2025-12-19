@@ -40,7 +40,7 @@ struct GoalView: View {
                 Color.white.ignoresSafeArea()
                 
                 VStack(spacing: 20) {
-                    Spacer(minLength: 24)
+                    Spacer(minLength: 40)
                     
                     VStack(alignment: .leading, spacing: 6) {
                         Text("집중할 목표를 설정해보세요")
@@ -83,15 +83,24 @@ struct GoalView: View {
                         }
                         .padding(.vertical, 12)
                         .frame(maxWidth: 240)
-                        .background(canMoveTimer ? .enableStart : .gray)
+                        .background(canMoveToTimer ? .enableStart : .gray)
                         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                         .foregroundColor(.white)
                     }
                     .buttonStyle(PlainButtonStyle())
                     .shadow(radius: 1)
-                    .disabled(!canMoveTimer)
+                    .disabled(!canMoveToTimer)
+                    .navigationDestination(isPresented: $shouldNavigate) {
+                        PomodoroTimerView(
+                            cycle: .first,
+                            focusStep: .focus,
+                            goal: $goal.wrappedValue,
+                            selectTabAction: selectTabAction,
+                            pomodoroID: pomodoroID
+                        )
+                    }
                     
-                    Spacer()
+                    Spacer(minLength: 40)
                 }
                 .padding(.vertical, 28)
                 .padding(.horizontal, 16)
@@ -100,8 +109,19 @@ struct GoalView: View {
         }
     }
     
-    private var canMoveTimer: Bool {
-        !goal.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        && !csf.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    private func savePomodoro() {
+        let realmManager = RealmManager()
+        
+        let pomodoro = PomodoroModel()
+        pomodoro.goal = goal
+        pomodoro.csf = csf
+        pomodoro.output = output
+        pomodoro.dateString = dateFormatter.string(from: pomodoro.timestamp)
+        pomodoroID = pomodoro.id
+        
+        let isSaved = realmManager.save(model: pomodoro)
+        if isSaved {
+            shouldNavigate = true
+        }
     }
 }
