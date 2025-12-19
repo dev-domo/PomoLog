@@ -7,12 +7,28 @@
 
 import SwiftUI
 
+import RealmSwift
+
 struct GoalView: View {
     
     let selectTabAction: (Int) -> Void
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy년 MM월 dd일"
+        formatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+        return formatter
+    }()
     
-    @State private var goal = ""
-    @State private var csf = ""
+    @State private var goal: String = ""
+    @State private var csf: String = ""
+    @State private var output: String = ""
+    @State private var shouldNavigate: Bool = false
+    @State private var pomodoroID: ObjectId = ObjectId()
+    private var canMoveToTimer: Bool {
+        !goal.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        && !csf.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        && !output.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
     
     init(selectTabAction: @escaping (Int) -> Void) {
         self.selectTabAction = selectTabAction
@@ -46,17 +62,18 @@ struct GoalView: View {
                             placeHolder: "목표 달성을 위한 핵심 성공 요인은 무엇인가요?",
                             text: $csf
                         )
+                        
+                        TextFieldView(
+                            title: "아웃풋",
+                            placeHolder: "목표를 달성하면 어떤 결과물이 나올까요?",
+                            text: $output
+                        )
                     }
                     .frame(maxWidth: 720, alignment: .leading)
                     .padding(.horizontal)
                     
-                    NavigationLink {
-                        PomodoroTimerView(
-                            cycle: .first,
-                            focusStep: .focus,
-                            goal: $goal.wrappedValue,
-                            selectTabAction: selectTabAction
-                        )
+                    Button {
+                        savePomodoro()
                     } label: {
                         HStack(spacing: 10) {
                             Image(systemName: "play.fill")

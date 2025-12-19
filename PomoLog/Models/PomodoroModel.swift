@@ -24,7 +24,10 @@ final class PomodoroModel: Object {
     var csf: String
     
     @Persisted
-    var summaries: List<String>
+    var output: String
+    
+    @Persisted
+    var summaries: List<SummaryModel>
     
     @Persisted
     var timestamp: Date
