@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import RealmSwift
+
 struct TimerView: View {
     
     private let seconds: Int = 60
@@ -16,6 +18,7 @@ struct TimerView: View {
     @Binding var focusStep: FocusStep
     @State var remainingTime: Int
     let selectTabAction: (Int) -> Void
+    let pomodoroID: ObjectId
     
     @State var timer: Timer?
     @State var isEnabled: Bool = false
@@ -24,12 +27,14 @@ struct TimerView: View {
     init(
         cycle: Binding<Cycle>,
         focusStep: Binding<FocusStep>,
-        selectTabAction: @escaping (Int) -> Void
+        selectTabAction: @escaping (Int) -> Void,
+        pomodoroID: ObjectId
     ) {
         self._cycle = cycle
         self._focusStep = focusStep
         self._remainingTime = State(initialValue: focusStep.wrappedValue.totalTime)
         self.selectTabAction = selectTabAction
+        self.pomodoroID = pomodoroID
     }
     
     var body: some View {
@@ -62,6 +67,7 @@ struct TimerView: View {
                         Button {
                             focusStep = PomodoroSchedular.shared.getNextStep()
                             remainingTime = focusStep.totalTime
+                            saveSummary()
                         } label: {
                             HStack {
                                 Text("완료하기")
@@ -130,5 +136,25 @@ struct TimerView: View {
         isEnabled = false
         timer?.invalidate()
         timer = nil
+    }
+    
+    private func saveSummary() {
+        let realmManager = RealmManager()
+        
+        let summaryModel = SummaryModel()
+        summaryModel.content = summary
+        
+        let isSaved = realmManager.save(model: summaryModel)
+        
+        if isSaved {
+            guard let fetchedPomodoroModel = realmManager.fetchById(id: pomodoroID, PomodoroModel.self) else {
+                return
+            }
+            
+            let _ = realmManager.update(model: fetchedPomodoroModel) {
+                fetchedPomodoroModel.summaries.append(summaryModel)
+                fetchedPomodoroModel.focusTime += FocusStep.focusTime
+            }
+        }
     }
 }

@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import RealmSwift
+
 struct PomodoroTimerView: View {
     
     @State var cycle: Cycle
@@ -14,6 +16,7 @@ struct PomodoroTimerView: View {
     @State var showPopUp: Bool = false
     let goal: String
     let selectTabAction: (Int) -> Void
+    let pomodoroID: ObjectId
     
     var body: some View {
         ZStack {
@@ -29,7 +32,8 @@ struct PomodoroTimerView: View {
                     TimerView(
                         cycle: $cycle,
                         focusStep: $focusStep,
-                        selectTabAction: selectTabAction
+                        selectTabAction: selectTabAction,
+                        pomodoroID: pomodoroID
                     )
                 }
                 
