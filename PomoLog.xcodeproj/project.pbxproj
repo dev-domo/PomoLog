@@ -6,14 +6,75 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1899FF072EF3F79B00C74BAD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1899FF062EF3F79B00C74BAD /* RealmSwift */; };
+		1899FF0A2EF3F7C800C74BAD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1899FF092EF3F7C800C74BAD /* RealmSwift */; };
+		1899FF0B2EF3F7C800C74BAD /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1899FF092EF3F7C800C74BAD /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		187742D42EF3F122006215C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 180224762EE4602C00EFBD70 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1802247D2EE4602C00EFBD70;
+			remoteInfo = PomoLog;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		18773FF62EF3DA41006215C7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		187742CE2EF3EA12006215C7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1899FF0B2EF3F7C800C74BAD /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1802247E2EE4602C00EFBD70 /* PomoLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomoLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18773FE62EF3D5BA006215C7 /* PomoLogTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomoLogTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		189901DF2EF3FC1500C74BAD /* Exceptions for "PomoLog" folder in "PomoLogTest" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Data/DataBase.swift,
+				Data/RealmManager.swift,
+				Models/SummaryModel.swift,
+			);
+			target = 18773FE52EF3D5BA006215C7 /* PomoLogTest */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		180224802EE4602C00EFBD70 /* PomoLog */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				189901DF2EF3FC1500C74BAD /* Exceptions for "PomoLog" folder in "PomoLogTest" target */,
+			);
 			path = PomoLog;
+			sourceTree = "<group>";
+		};
+		18773FE72EF3D5BA006215C7 /* PomoLogTest */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PomoLogTest;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -23,6 +84,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1899FF0A2EF3F7C800C74BAD /* RealmSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18773FE32EF3D5BA006215C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1899FF072EF3F79B00C74BAD /* RealmSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -33,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				180224802EE4602C00EFBD70 /* PomoLog */,
+				18773FE72EF3D5BA006215C7 /* PomoLogTest */,
+				187742D62EF3F270006215C7 /* Frameworks */,
 				1802247F2EE4602C00EFBD70 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,8 +113,16 @@
 			isa = PBXGroup;
 			children = (
 				1802247E2EE4602C00EFBD70 /* PomoLog.app */,
+				18773FE62EF3D5BA006215C7 /* PomoLogTest.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		187742D62EF3F270006215C7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -55,6 +135,7 @@
 				1802247A2EE4602C00EFBD70 /* Sources */,
 				1802247B2EE4602C00EFBD70 /* Frameworks */,
 				1802247C2EE4602C00EFBD70 /* Resources */,
+				187742CE2EF3EA12006215C7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -65,10 +146,36 @@
 			);
 			name = PomoLog;
 			packageProductDependencies = (
+				1899FF092EF3F7C800C74BAD /* RealmSwift */,
 			);
 			productName = PomoLog;
 			productReference = 1802247E2EE4602C00EFBD70 /* PomoLog.app */;
 			productType = "com.apple.product-type.application";
+		};
+		18773FE52EF3D5BA006215C7 /* PomoLogTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18773FEA2EF3D5BA006215C7 /* Build configuration list for PBXNativeTarget "PomoLogTest" */;
+			buildPhases = (
+				18773FE22EF3D5BA006215C7 /* Sources */,
+				18773FE32EF3D5BA006215C7 /* Frameworks */,
+				18773FE42EF3D5BA006215C7 /* Resources */,
+				18773FF62EF3DA41006215C7 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				187742D52EF3F122006215C7 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				18773FE72EF3D5BA006215C7 /* PomoLogTest */,
+			);
+			name = PomoLogTest;
+			packageProductDependencies = (
+				1899FF062EF3F79B00C74BAD /* RealmSwift */,
+			);
+			productName = PomoLogTest;
+			productReference = 18773FE62EF3D5BA006215C7 /* PomoLogTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -83,6 +190,9 @@
 					1802247D2EE4602C00EFBD70 = {
 						CreatedOnToolsVersion = 16.2;
 					};
+					18773FE52EF3D5BA006215C7 = {
+						CreatedOnToolsVersion = 16.2;
+					};
 				};
 			};
 			buildConfigurationList = 180224792EE4602C00EFBD70 /* Build configuration list for PBXProject "PomoLog" */;
@@ -94,18 +204,29 @@
 			);
 			mainGroup = 180224752EE4602C00EFBD70;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				18773FC62EF39F36006215C7 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1802247F2EE4602C00EFBD70 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				1802247D2EE4602C00EFBD70 /* PomoLog */,
+				18773FE52EF3D5BA006215C7 /* PomoLogTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1802247C2EE4602C00EFBD70 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18773FE42EF3D5BA006215C7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +243,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		18773FE22EF3D5BA006215C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		187742D52EF3F122006215C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1802247D2EE4602C00EFBD70 /* PomoLog */;
+			targetProxy = 187742D42EF3F122006215C7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1802248A2EE4602D00EFBD70 /* Debug */ = {
@@ -312,6 +448,46 @@
 			};
 			name = Release;
 		};
+		18773FEB2EF3D5BA006215C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5J43V9D9J;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.heopaka.PomoLogTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = NO;
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		18773FEC2EF3D5BA006215C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5J43V9D9J;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.heopaka.PomoLogTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = NO;
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -333,7 +509,40 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		18773FEA2EF3D5BA006215C7 /* Build configuration list for PBXNativeTarget "PomoLogTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18773FEB2EF3D5BA006215C7 /* Debug */,
+				18773FEC2EF3D5BA006215C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		18773FC62EF39F36006215C7 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1899FF062EF3F79B00C74BAD /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18773FC62EF39F36006215C7 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		1899FF092EF3F7C800C74BAD /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18773FC62EF39F36006215C7 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 180224762EE4602C00EFBD70 /* Project object */;
 }
