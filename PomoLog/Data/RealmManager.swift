@@ -11,13 +11,12 @@ final class RealmManager: DataBase {
     
     private let realm: Realm?
     
-    init(realm: Realm? = try? Realm()) {
+    init(realm: Realm? = RealmFactory.shared.createRealm()) {
         self.realm = realm
     }
     
     func save<T>(model: T) -> Bool where T : Object {
         let result: ()? = try? realm?.write {
-            // 이미 id가 존재하면 업데이트
             realm?.add(model, update: .modified)
         }
         return result != nil
