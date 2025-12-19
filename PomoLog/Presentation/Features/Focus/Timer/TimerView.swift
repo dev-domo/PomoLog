@@ -95,6 +95,9 @@ struct TimerView: View {
                         TimerButton(
                             action: {
                                 stopTimer()
+                                if focusStep == .focus {
+                                    updateFocusTime(remainingTime: remainingTime)
+                                }
                                 selectTabAction(1)
                             },
                             imageName: "stop.fill"
@@ -129,6 +132,9 @@ struct TimerView: View {
             if focusStep == .focus {
                 cycle = cycle.update()
             }
+            if focusStep == .focusSummary {
+                updateFocusTime()
+            }
         }
     }
     
@@ -153,8 +159,31 @@ struct TimerView: View {
             
             let _ = realmManager.update(model: fetchedPomodoroModel) {
                 fetchedPomodoroModel.summaries.append(summaryModel)
-                fetchedPomodoroModel.focusTime += FocusStep.focusTime
             }
+        }
+    }
+    
+    private func updateFocusTime() {
+        let realmManager = RealmManager()
+        
+        guard let fetchedPomodoroModel = realmManager.fetchById(id: pomodoroID, PomodoroModel.self) else {
+            return
+        }
+        
+        let _ = realmManager.update(model: fetchedPomodoroModel) {
+            fetchedPomodoroModel.focusTime += FocusStep.focusTime
+        }
+    }
+    
+    private func updateFocusTime(remainingTime: Int) {
+        let realmManager = RealmManager()
+        
+        guard let fetchedPomodoroModel = realmManager.fetchById(id: pomodoroID, PomodoroModel.self) else {
+            return
+        }
+        
+        let _ = realmManager.update(model: fetchedPomodoroModel) {
+            fetchedPomodoroModel.focusTime += FocusStep.focusTime - remainingTime
         }
     }
 }
