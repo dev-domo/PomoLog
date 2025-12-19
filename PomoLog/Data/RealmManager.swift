@@ -22,6 +22,13 @@ final class RealmManager: DataBase {
         return result != nil
     }
     
+    func update<T>(model: T, action: () -> Void) -> Bool where T : Object {
+        let result: Void? = try? realm?.write({
+            action()
+        })
+        return result != nil
+    }
+    
     func fetchAll<T>(_ type: T.Type) -> Results<T>? where T : Object {
         let results = realm?.objects(T.self)
         return results
