@@ -25,7 +25,7 @@ struct RealmTest {
     }
     
     @Test("같은 id의 SummaryModel을 DB에 저장하면 기존 데이터 수정")
-    func update_summaryModel__success() {
+    func save_same_summaryModel__success() {
         let realmManager = createRealmManager()
         let model = createSummaryModel()
         let _ = realmManager.save(model: model)
@@ -37,6 +37,21 @@ struct RealmTest {
         
         #expect(isSaved)
         #expect(realmManager.fetchAll(SummaryModel.self)?.count == .some(1))
+    }
+    
+    @Test("기존 SummaryModel의 속성 수정")
+    func update_summaryModel__success() throws {
+        let realmManager = createRealmManager()
+        let model = createSummaryModel()
+        let _ = realmManager.save(model: model)
+        
+        let fetchedModel = try #require(realmManager.fetchById(id: model.id, SummaryModel.self))
+        let isUpdated = realmManager.update(model: fetchedModel) {
+            fetchedModel.content = "요약"
+        }
+        
+        #expect(isUpdated)
+        #expect(realmManager.fetchById(id: model.id, SummaryModel.self)?.content == .some("요약"))
     }
     
     @Test("DB에서 요약 데이터 전체 조회")

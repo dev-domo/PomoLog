@@ -7,12 +7,28 @@
 
 import SwiftUI
 
+import RealmSwift
+
 struct GoalView: View {
     
     let selectTabAction: (Int) -> Void
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy년 MM월 dd일"
+        formatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+        return formatter
+    }()
     
-    @State private var goal = ""
-    @State private var csf = ""
+    @State private var goal: String = ""
+    @State private var csf: String = ""
+    @State private var output: String = ""
+    @State private var shouldNavigate: Bool = false
+    @State private var pomodoroID: ObjectId = ObjectId()
+    private var canMoveToTimer: Bool {
+        !goal.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        && !csf.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        && !output.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
     
     init(selectTabAction: @escaping (Int) -> Void) {
         self.selectTabAction = selectTabAction
@@ -24,7 +40,7 @@ struct GoalView: View {
                 Color.white.ignoresSafeArea()
                 
                 VStack(spacing: 20) {
-                    Spacer(minLength: 24)
+                    Spacer(minLength: 40)
                     
                     VStack(alignment: .leading, spacing: 6) {
                         Text("집중할 목표를 설정해보세요")
@@ -46,17 +62,18 @@ struct GoalView: View {
                             placeHolder: "목표 달성을 위한 핵심 성공 요인은 무엇인가요?",
                             text: $csf
                         )
+                        
+                        TextFieldView(
+                            title: "아웃풋",
+                            placeHolder: "목표를 달성하면 어떤 결과물이 나올까요?",
+                            text: $output
+                        )
                     }
                     .frame(maxWidth: 720, alignment: .leading)
                     .padding(.horizontal)
                     
-                    NavigationLink {
-                        PomodoroTimerView(
-                            cycle: .first,
-                            focusStep: .focus,
-                            goal: $goal.wrappedValue,
-                            selectTabAction: selectTabAction
-                        )
+                    Button {
+                        savePomodoro()
                     } label: {
                         HStack(spacing: 10) {
                             Image(systemName: "play.fill")
@@ -66,15 +83,24 @@ struct GoalView: View {
                         }
                         .padding(.vertical, 12)
                         .frame(maxWidth: 240)
-                        .background(canMoveTimer ? .enableStart : .gray)
+                        .background(canMoveToTimer ? .enableStart : .gray)
                         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                         .foregroundColor(.white)
                     }
                     .buttonStyle(PlainButtonStyle())
                     .shadow(radius: 1)
-                    .disabled(!canMoveTimer)
+                    .disabled(!canMoveToTimer)
+                    .navigationDestination(isPresented: $shouldNavigate) {
+                        PomodoroTimerView(
+                            cycle: .first,
+                            focusStep: .focus,
+                            goal: $goal.wrappedValue,
+                            selectTabAction: selectTabAction,
+                            pomodoroID: pomodoroID
+                        )
+                    }
                     
-                    Spacer()
+                    Spacer(minLength: 40)
                 }
                 .padding(.vertical, 28)
                 .padding(.horizontal, 16)
@@ -83,8 +109,19 @@ struct GoalView: View {
         }
     }
     
-    private var canMoveTimer: Bool {
-        !goal.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        && !csf.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    private func savePomodoro() {
+        let realmManager = RealmManager()
+        
+        let pomodoro = PomodoroModel()
+        pomodoro.goal = goal
+        pomodoro.csf = csf
+        pomodoro.output = output
+        pomodoro.dateString = dateFormatter.string(from: pomodoro.timestamp)
+        pomodoroID = pomodoro.id
+        
+        let isSaved = realmManager.save(model: pomodoro)
+        if isSaved {
+            shouldNavigate = true
+        }
     }
 }
