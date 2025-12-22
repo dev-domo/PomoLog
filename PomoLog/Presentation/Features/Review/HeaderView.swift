@@ -26,7 +26,7 @@ struct HeaderView: View {
             HStack {
                 HeaderButtonView(
                     month: $month,
-                    imageName: "arrow.backward.circle",
+                    image: .previous,
                     action: getPreviousMonth
                 )
                 .padding(.trailing)
@@ -38,7 +38,7 @@ struct HeaderView: View {
                 
                 HeaderButtonView(
                     month: $month,
-                    imageName: "arrow.forward.circle",
+                    image: .next,
                     action: getNextMonth
                 )
                 .padding(.leading)

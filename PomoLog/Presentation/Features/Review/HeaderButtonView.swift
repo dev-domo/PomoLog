@@ -10,14 +10,14 @@ import SwiftUI
 struct HeaderButtonView: View {
     
     @Binding var month: Date
-    let imageName: String
+    let image: Image
     let action: () -> Date
     
     var body: some View {
         Button {
             month = action()
         } label: {
-            Image(systemName: imageName)
+            image
         }
         .buttonStyle(PlainButtonStyle())
         .padding(.bottom)

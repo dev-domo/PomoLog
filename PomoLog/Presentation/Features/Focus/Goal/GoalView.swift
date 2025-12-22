@@ -76,7 +76,7 @@ struct GoalView: View {
                         savePomodoro()
                     } label: {
                         HStack(spacing: 10) {
-                            Image(systemName: "play.fill")
+                            Image.play
                                 .font(.headline)
                             Text("시작하기")
                                 .font(.customSemiBold(ofSize: 14))

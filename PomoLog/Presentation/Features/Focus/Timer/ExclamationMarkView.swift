@@ -16,7 +16,7 @@ struct ExclamationMarkView: View {
         Button {
             showPopUp = true
         } label: {
-            Image(systemName: "exclamationmark.circle.fill")
+            Image.exclamation
                 .frame(width: 50)
                 .foregroundStyle(.gray)
         }

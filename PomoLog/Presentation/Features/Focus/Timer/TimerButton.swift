@@ -10,14 +10,14 @@ import SwiftUI
 struct TimerButton: View {
     
     let action: () -> Void
-    let imageName: String
+    let image: Image
     
     init(
         action: @escaping () -> Void,
-        imageName: String
+        image: Image
     ) {
         self.action = action
-        self.imageName = imageName
+        self.image = image
     }
     
     var body: some View {
@@ -29,7 +29,7 @@ struct TimerButton: View {
                     .stroke(.lightGray, lineWidth: 4)
                     .frame(width: 40, height: 40)
                 
-                Image(systemName: imageName)
+                image
                     .font(.system(size: 25))
             }
         }

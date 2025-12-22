@@ -55,7 +55,7 @@ struct TimerView: View {
             if !isEnabled {
                 TimerButton(
                     action: { startTimer() },
-                    imageName: "play.fill"
+                    image: .play
                 )
             } else {
                 if focusStep == .focusSummary {
@@ -89,7 +89,7 @@ struct TimerView: View {
                     HStack(spacing: 16) {
                         TimerButton(
                             action: { stopTimer() },
-                            imageName: "pause.fill"
+                            image: .pause
                         )
                         
                         TimerButton(
@@ -100,7 +100,7 @@ struct TimerView: View {
                                 }
                                 selectTabAction(1)
                             },
-                            imageName: "stop.fill"
+                            image: .stop
                         )
                     }
                 }
