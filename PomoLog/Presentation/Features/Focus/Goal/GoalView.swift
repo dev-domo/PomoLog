@@ -110,7 +110,7 @@ struct GoalView: View {
     }
     
     private func savePomodoro() {
-        let realmManager = RealmManager()
+        let realmManager = PomodoroRealmManager()
         
         let pomodoro = PomodoroModel()
         pomodoro.goal = goal

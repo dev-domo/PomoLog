@@ -9,6 +9,8 @@ import RealmSwift
 
 protocol DataBase {
     
+    var realm: Realm? { get }
+    
     func save<T: Object>(model: T) -> Bool
     func update<T: Object>(model: T, action: () -> Void) -> Bool
     func fetchAll<T: Object>(_ type: T.Type) -> Results<T>?

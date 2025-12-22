@@ -145,7 +145,7 @@ struct TimerView: View {
     }
     
     private func saveSummary() {
-        let realmManager = RealmManager()
+        let realmManager = PomodoroRealmManager()
         
         let summaryModel = SummaryModel()
         summaryModel.content = summary
@@ -164,7 +164,7 @@ struct TimerView: View {
     }
     
     private func updateFocusTime() {
-        let realmManager = RealmManager()
+        let realmManager = PomodoroRealmManager()
         
         guard let fetchedPomodoroModel = realmManager.fetchById(id: pomodoroID, PomodoroModel.self) else {
             return
@@ -176,7 +176,7 @@ struct TimerView: View {
     }
     
     private func updateFocusTime(remainingTime: Int) {
-        let realmManager = RealmManager()
+        let realmManager = PomodoroRealmManager()
         
         guard let fetchedPomodoroModel = realmManager.fetchById(id: pomodoroID, PomodoroModel.self) else {
             return

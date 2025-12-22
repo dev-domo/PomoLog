@@ -56,8 +56,9 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Data/DataBase.swift,
+				"Data/DataBase+.swift",
+				Data/PomodoroRealmManager.swift,
 				Data/RealmFactory.swift,
-				Data/RealmManager.swift,
 				Models/SummaryModel.swift,
 			);
 			target = 18773FE52EF3D5BA006215C7 /* PomoLogTest */;
