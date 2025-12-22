@@ -26,7 +26,7 @@ struct PomodoroTimerView: View {
                 VStack {
                     HStack {
                         ProgressBarView(cycle: $cycle, goal: goal)
-                        QuestionMarkView(showPopUp: $showPopUp, goal: goal)
+                        ExclamationMarkView(showPopUp: $showPopUp, goal: goal)
                     }
                     FocusStepView(focusStep: $focusStep)
                     TimerView(
