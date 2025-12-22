@@ -22,7 +22,7 @@ struct TopNavigationView: View {
             }
             .tag(0)
             
-            ReviewView()
+            CalendarView(month: Date())
                 .tabItem {
                     Image(systemName: "book")
                     Text("돌아보기")
