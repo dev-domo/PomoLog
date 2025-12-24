@@ -17,7 +17,16 @@ final class PomodoroRealmManager: Database {
         self.realm = realm
     }
     
-    func fetchByDate(target date: Date) -> [PomodoroModel]? {
-        return realm?.objects(PomodoroModel.self).filter({ $0.timestamp == date })
+    func fetchByDate(target date: Date) -> Results<PomodoroModel>? {
+        let calendar = Calendar.current
+        let startDate = calendar.startOfDay(for: date)
+        guard let endDate = calendar.date(byAdding: .day, value: 1, to: startDate) else {
+            return nil
+        }
+        
+        let result = realm?.objects(PomodoroModel.self).where {
+            $0.timestamp >= startDate && $0.timestamp < endDate
+        }
+        return result
     }
 }
