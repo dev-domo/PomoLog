@@ -25,8 +25,8 @@ struct PomodoroRealmManagerTest {
         #expect(fetchedData.first == pomodoroModel)
     }
     
-    @Test("집중 시간이 0초이면 포모도로 기록이 없는 것으로 간주")
-    func hasPomodoro_focusTime_zero__false() throws {
+    @Test("집중 시간이 0초이면 포모도로 기록이 아닌 것으로 간주")
+    func fetchByDate_focusTime_zero__noData() throws {
         let realmManager = createPomodoroRealmManager()
         let pomodoroModel = createPomodoroModel()
         let _ = realmManager.save(model: pomodoroModel)
