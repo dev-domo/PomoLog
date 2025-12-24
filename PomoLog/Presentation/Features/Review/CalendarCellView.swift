@@ -8,16 +8,13 @@
 import SwiftUI
 
 struct CalendarCellView: View {
-    var day: Int
-    var clicked: Bool
     
-    init(day: Int, clicked: Bool) {
-        self.day = day
-        self.clicked = clicked
-    }
+    let day: Int
+    let clicked: Bool
+    let hasPomodoro: Bool
     
     var body: some View {
-        VStack {
+        VStack(spacing: 2) {
             Text("\(day)")
                 .font(.customLight(ofSize: 14))
                 .foregroundStyle(clicked ? .white : .mainText)
@@ -26,6 +23,11 @@ struct CalendarCellView: View {
                     RoundedRectangle(cornerRadius: 5)
                         .fill(clicked ? .enableStart : .white)
                 )
+            
+            Rectangle()
+                .frame(width: 10, height: 2)
+                .foregroundStyle(.black)
+                .opacity(hasPomodoro ? 1 : 0)
         }
     }
 }
