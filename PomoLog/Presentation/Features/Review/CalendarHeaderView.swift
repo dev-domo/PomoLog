@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HeaderView: View {
+struct CalendarHeaderView: View {
     
     private let previous: Int = -1
     private let next: Int = 1
@@ -24,7 +24,7 @@ struct HeaderView: View {
     var body: some View {
         VStack {
             HStack {
-                HeaderButtonView(
+                CalendarHeaderButtonView(
                     month: $month,
                     image: .previous,
                     action: getPreviousMonth
@@ -36,7 +36,7 @@ struct HeaderView: View {
                     .padding(.bottom)
                 
                 
-                HeaderButtonView(
+                CalendarHeaderButtonView(
                     month: $month,
                     image: .next,
                     action: getNextMonth
@@ -56,7 +56,7 @@ struct HeaderView: View {
     }
 }
 
-extension HeaderView {
+extension CalendarHeaderView {
     
     func getPreviousMonth() -> Date {
         Calendar.current.date(byAdding: .month, value: previous, to: month)!

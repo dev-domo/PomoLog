@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HeaderButtonView: View {
+struct CalendarHeaderButtonView: View {
     
     @Binding var month: Date
     let image: Image

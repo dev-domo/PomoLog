@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct CalendarView: View {
-    
-    private let realmManager = PomodoroRealmManager()
-    
+        
     @State var month: Date
     @State var offset: CGSize = CGSize()
     @State var clickedDate: Date = Date()
@@ -19,9 +17,13 @@ struct CalendarView: View {
         ZStack {
             Color.white.ignoresSafeArea()
             
-            VStack {
-                HeaderView(month: $month)
-                calendarGridView
+            HStack {
+                VStack {
+                    CalendarHeaderView(month: $month)
+                    calendarGridView
+                }
+                
+                TimelineView(clickedDate: $clickedDate)
             }
         }
         .gesture(
@@ -59,7 +61,6 @@ struct CalendarView: View {
                         CellView(day: day, clicked: clicked)
                             .onTapGesture {
                                 clickedDate = date
-                                fetchPomodoros(date: clickedDate)
                             }
                     }
                 }
@@ -94,6 +95,7 @@ private struct CellView: View {
 
 // MARK: - 내부 메서드
 private extension CalendarView {
+    
     private func getDate(for day: Int) -> Date {
         return Calendar.current.date(byAdding: .day, value: day, to: startOfMonth())!
     }
@@ -120,12 +122,4 @@ private extension CalendarView {
             self.month = newMonth
         }
     }
-    
-    func fetchPomodoros(date: Date) {
-        print("Fetched: ", realmManager.fetchByDate(target: clickedDate))
-    }
-}
-
-#Preview {
-    CalendarView(month: Date())
 }
