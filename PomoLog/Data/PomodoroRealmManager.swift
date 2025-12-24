@@ -29,4 +29,11 @@ final class PomodoroRealmManager: Database {
         }
         return result
     }
+    
+    func hasPomodoro(target date: Date) -> Bool? {
+        guard let result = fetchByDate(target: date) else {
+            return nil
+        }
+        return !result.isEmpty
+    }
 }
