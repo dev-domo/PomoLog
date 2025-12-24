@@ -17,6 +17,7 @@ struct PomodoroRealmManagerTest {
     func fetchByDate_pomodoro__success() throws {
         let realmManager = createPomodoroRealmManager()
         let pomodoroModel = createPomodoroModel()
+        pomodoroModel.focusTime = 1
         let _ = realmManager.save(model: pomodoroModel)
         
         let fetchedData = try #require(realmManager.fetchByDate(target: Date()))
@@ -24,8 +25,19 @@ struct PomodoroRealmManagerTest {
         #expect(fetchedData.first == pomodoroModel)
     }
     
+    @Test("집중 시간이 0초이면 포모도로 기록이 없는 것으로 간주")
+    func hasPomodoro_focusTime_zero__false() throws {
+        let realmManager = createPomodoroRealmManager()
+        let pomodoroModel = createPomodoroModel()
+        let _ = realmManager.save(model: pomodoroModel)
+        
+        let fetchedData = realmManager.fetchByDate(target: Date())
+        
+        #expect(fetchedData?.count == 0)
+    }
+    
     @Test("오늘 날짜에 포모도로 기록이 있는지 여부 조회")
-    func hasPomodoro__result() throws {
+    func hasPomodoro_today__true() throws {
         let realmManager = createPomodoroRealmManager()
         let pomodoroModel = createPomodoroModel()
         let _ = realmManager.save(model: pomodoroModel)
