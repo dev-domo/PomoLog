@@ -49,9 +49,13 @@ struct RealmManagerTest {
         let isUpdated = realmManager.update(model: fetchedModel) {
             fetchedModel.content = "요약"
         }
+        let updatedContent = realmManager.fetchById(
+            id: model.id,
+            SummaryModel.self
+        )?.content
         
         #expect(isUpdated)
-        #expect(realmManager.fetchById(id: model.id, SummaryModel.self)?.content == .some("요약"))
+        #expect(updatedContent == "요약")
     }
     
     @Test("DB에서 요약 데이터 전체 조회")
