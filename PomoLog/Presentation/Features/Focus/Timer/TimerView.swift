@@ -108,6 +108,9 @@ struct TimerView: View {
         }
         .frame(minWidth: 600, alignment: .center)
     }
+}
+
+extension TimerView {
     
     private func formatTime(_ time: Int) -> String {
         let minutes = time / seconds
