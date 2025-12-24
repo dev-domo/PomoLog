@@ -58,37 +58,13 @@ struct CalendarView: View {
                         let day = index - firstWeekday + 1
                         let clicked = clickedDate == date
                         
-                        CellView(day: day, clicked: clicked)
+                        CalendarCellView(day: day, clicked: clicked)
                             .onTapGesture {
                                 clickedDate = date
                             }
                     }
                 }
             }
-        }
-    }
-}
-
-// MARK: - 일자 셀 뷰
-private struct CellView: View {
-    var day: Int
-    var clicked: Bool
-    
-    init(day: Int, clicked: Bool) {
-        self.day = day
-        self.clicked = clicked
-    }
-    
-    var body: some View {
-        VStack {
-            Text("\(day)")
-                .font(.customLight(ofSize: 14))
-                .foregroundStyle(clicked ? .white : .mainText)
-                .padding(5)
-                .background(
-                    RoundedRectangle(cornerRadius: 5)
-                        .fill(clicked ? .enableStart : .white)
-                )
         }
     }
 }
