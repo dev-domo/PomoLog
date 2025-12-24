@@ -7,7 +7,7 @@
 
 import RealmSwift
 
-extension DataBase {
+extension Database {
     
     func save<T>(model: T) -> Bool where T : Object {
         let result: ()? = try? realm?.write {

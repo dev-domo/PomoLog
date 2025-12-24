@@ -55,8 +55,8 @@
 		189901DF2EF3FC1500C74BAD /* Exceptions for "PomoLog" folder in "PomoLogTest" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Data/DataBase.swift,
-				"Data/DataBase+.swift",
+				Data/Database.swift,
+				"Data/Database+.swift",
 				Data/PomodoroRealmManager.swift,
 				Data/RealmFactory.swift,
 				Data/SummaryRealmManager.swift,

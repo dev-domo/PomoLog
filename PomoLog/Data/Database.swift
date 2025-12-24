@@ -7,7 +7,7 @@
 
 import RealmSwift
 
-protocol DataBase {
+protocol Database {
     
     var realm: Realm? { get }
     

@@ -7,7 +7,7 @@
 
 import RealmSwift
 
-struct SummaryRealmManager: DataBase {
+struct SummaryRealmManager: Database {
     
     var realm: Realm?
     

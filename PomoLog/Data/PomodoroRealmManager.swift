@@ -9,7 +9,7 @@ import Foundation
 
 import RealmSwift
 
-final class PomodoroRealmManager: DataBase {
+final class PomodoroRealmManager: Database {
     
     var realm: Realm?
     
