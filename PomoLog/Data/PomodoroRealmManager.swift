@@ -24,9 +24,11 @@ final class PomodoroRealmManager: Database {
             return nil
         }
         
-        let result = realm?.objects(PomodoroModel.self).where {
-            $0.timestamp >= startDate && $0.timestamp < endDate
-        }
+        let result = realm?.objects(PomodoroModel.self)
+            .where {
+                $0.timestamp >= startDate && $0.timestamp < endDate
+                && $0.focusTime > 0
+            }
         return result
     }
     
