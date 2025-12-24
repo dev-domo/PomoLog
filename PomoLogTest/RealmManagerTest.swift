@@ -12,11 +12,11 @@ import RealmSwift
 
 @testable import PomoLog
 
-struct RealmTest {
+struct RealmManagerTest {
 
     @Test("SummaryModel을 DB에 저장")
     func save_summaryModel__success() {
-        let realmManager = createRealmManager()
+        let realmManager = createSummaryRealmManager()
         let model = createSummaryModel()
         
         let isSaved = realmManager.save(model: model)
@@ -26,7 +26,7 @@ struct RealmTest {
     
     @Test("같은 id의 SummaryModel을 DB에 저장하면 기존 데이터 수정")
     func save_same_summaryModel__success() {
-        let realmManager = createRealmManager()
+        let realmManager = createSummaryRealmManager()
         let model = createSummaryModel()
         let _ = realmManager.save(model: model)
         
@@ -41,7 +41,7 @@ struct RealmTest {
     
     @Test("기존 SummaryModel의 속성 수정")
     func update_summaryModel__success() throws {
-        let realmManager = createRealmManager()
+        let realmManager = createSummaryRealmManager()
         let model = createSummaryModel()
         let _ = realmManager.save(model: model)
         
@@ -56,7 +56,7 @@ struct RealmTest {
     
     @Test("DB에서 요약 데이터 전체 조회")
     func fetchAll_summaries__success() throws {
-        let realmManager = createRealmManager()
+        let realmManager = createSummaryRealmManager()
         let model = createSummaryModel()
         let _ = realmManager.save(model: model)
         
@@ -67,7 +67,7 @@ struct RealmTest {
     
     @Test("DB에서 id 기반 요약 데이터 조회")
     func fetchById_summary__success() throws {
-        let realmManager = createRealmManager()
+        let realmManager = createSummaryRealmManager()
         let model = createSummaryModel()
         let _ = realmManager.save(model: model)
         
@@ -78,7 +78,7 @@ struct RealmTest {
     
     @Test("DB에서 id 기반 요약 데이터 삭제")
     func delete_summary__success() throws {
-        let realmManager = createRealmManager()
+        let realmManager = createSummaryRealmManager()
         let model = createSummaryModel()
         let _ = realmManager.save(model: model)
         
@@ -87,10 +87,10 @@ struct RealmTest {
         #expect(isDeleted)
     }
     
-    private func createRealmManager() -> RealmManager {
+    private func createSummaryRealmManager() -> SummaryRealmManager {
         let configuration = Realm.Configuration(inMemoryIdentifier: UUID().uuidString)
         let realm = try? Realm(configuration: configuration)
-        let realmManager = RealmManager(realm: realm)
+        let realmManager = SummaryRealmManager(realm: realm)
         
         return realmManager
     }
