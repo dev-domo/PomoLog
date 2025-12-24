@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct CalendarView: View {
+    
+    private let dragToLeft: CGFloat = -100
+    private let dragToRight: CGFloat = 100
         
     @State var month: Date
     @State var offset: CGSize = CGSize()
