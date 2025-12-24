@@ -92,8 +92,7 @@ struct RealmManagerTest {
     }
     
     private func createSummaryRealmManager() -> SummaryRealmManager {
-        let configuration = Realm.Configuration(inMemoryIdentifier: UUID().uuidString)
-        let realm = try? Realm(configuration: configuration)
+        let realm = InMemoryDatabaseFactory.createRealm()
         let realmManager = SummaryRealmManager(realm: realm)
         
         return realmManager
