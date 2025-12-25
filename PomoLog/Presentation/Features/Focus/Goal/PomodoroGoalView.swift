@@ -108,6 +108,9 @@ struct PomodoroGoalView: View {
             }
         }
     }
+}
+
+extension PomodoroGoalView {
     
     private func savePomodoro() {
         let realmManager = PomodoroRealmManager()
