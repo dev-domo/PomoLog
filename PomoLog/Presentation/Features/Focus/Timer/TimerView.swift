@@ -22,8 +22,7 @@ struct TimerView: View {
     
     @State var timer: Timer?
     @State var isEnabled: Bool = false
-    @State var summary: String = ""
-    
+
     init(
         cycle: Binding<Cycle>,
         focusStep: Binding<FocusStep>,
@@ -59,50 +58,20 @@ struct TimerView: View {
                 )
             } else {
                 if focusStep == .focusSummary {
-                    HStack(spacing: 16) {
-                        TextField("어떤 일을 수행하셨나요?", text: $summary)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(height: 40)
-                        
-                        Button {
-                            focusStep = PomodoroSchedular.shared.getNextStep()
-                            remainingTime = focusStep.totalTime
-                            saveSummary()
-                        } label: {
-                            HStack {
-                                Text("완료하기")
-                                    .font(.customSemiBold(ofSize: 14))
-                            }
-                            .padding(.vertical, 4)
-                            .frame(width: 80)
-                            .background(summary.isEmpty ? .gray : .enableStart)
-                            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-                            .foregroundColor(.white)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        .shadow(radius: 1)
-                        .disabled(summary.isEmpty)
-                        .frame(height: 40)
-                    }
-                    .frame(width: 500)
+                    SummaryView(
+                        focusStep: $focusStep,
+                        remainingTime: $remainingTime,
+                        pomodoroID: pomodoroID
+                    )
                 } else {
-                    HStack(spacing: 16) {
-                        TimerButton(
-                            action: { stopTimer() },
-                            image: .pause
-                        )
-                        
-                        TimerButton(
-                            action: {
-                                stopTimer()
-                                if focusStep == .focus {
-                                    updateFocusTime(remainingTime: remainingTime)
-                                }
-                                selectTabAction(1)
-                            },
-                            image: .stop
-                        )
-                    }
+                    StopTimerView(
+                        focusStep: $focusStep,
+                        remainingTime: $remainingTime,
+                        isEnabled: $isEnabled,
+                        timer: $timer,
+                        pomodoroID: pomodoroID,
+                        selectTabAction: selectTabAction
+                    )
                 }
             }
         }
@@ -147,25 +116,6 @@ extension TimerView {
         timer = nil
     }
     
-    private func saveSummary() {
-        let realmManager = PomodoroRealmManager()
-        
-        let summaryModel = SummaryModel()
-        summaryModel.content = summary
-        
-        let isSaved = realmManager.save(model: summaryModel)
-        
-        if isSaved {
-            guard let fetchedPomodoroModel = realmManager.fetchById(id: pomodoroID, PomodoroModel.self) else {
-                return
-            }
-            let _ = realmManager.update(model: fetchedPomodoroModel) {
-                fetchedPomodoroModel.summaries.append(summaryModel)
-            }
-            initSummary()
-        }
-    }
-    
     private func updateFocusTime() {
         let realmManager = PomodoroRealmManager()
         
@@ -188,9 +138,5 @@ extension TimerView {
         let _ = realmManager.update(model: fetchedPomodoroModel) {
             fetchedPomodoroModel.focusTime += FocusStep.focusTime - remainingTime
         }
-    }
-    
-    private func initSummary() {
-        summary = ""
     }
 }
