@@ -111,17 +111,29 @@ struct PomodoroGoalView: View {
     
     private func savePomodoro() {
         let realmManager = PomodoroRealmManager()
-        
-        let pomodoro = PomodoroModel()
-        pomodoro.goal = goal
-        pomodoro.csf = csf
-        pomodoro.output = output
-        pomodoro.dateString = dateFormatter.string(from: pomodoro.timestamp)
+        let pomodoro = configurePomodoro()
         pomodoroID = pomodoro.id
         
         let isSaved = realmManager.save(model: pomodoro)
         if isSaved {
             shouldNavigate = true
+            initInformation()
         }
+    }
+    
+    private func configurePomodoro() -> PomodoroModel {
+        let pomodoro = PomodoroModel()
+        pomodoro.goal = goal
+        pomodoro.csf = csf
+        pomodoro.output = output
+        pomodoro.dateString = dateFormatter.string(from: pomodoro.timestamp)
+        
+        return pomodoro
+    }
+    
+    private func initInformation() {
+        goal = ""
+        csf = ""
+        output = ""
     }
 }
