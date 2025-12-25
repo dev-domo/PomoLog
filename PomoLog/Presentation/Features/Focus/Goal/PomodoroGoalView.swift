@@ -52,20 +52,17 @@ struct PomodoroGoalView: View {
                     
                     VStack(alignment: .leading, spacing: 16) {
                         TextFieldView(
-                            title: "목표",
-                            placeHolder: "이번 포모도로 동안 어떤 목표를 달성할 건가요?",
+                            inputType: .goal,
                             text: $goal
                         )
                         
                         TextFieldView(
-                            title: "핵심 성공 요인",
-                            placeHolder: "목표 달성을 위한 핵심 성공 요인은 무엇인가요?",
+                            inputType: .csf,
                             text: $csf
                         )
                         
                         TextFieldView(
-                            title: "아웃풋",
-                            placeHolder: "목표를 달성하면 어떤 결과물이 나올까요?",
+                            inputType: .output,
                             text: $output
                         )
                     }

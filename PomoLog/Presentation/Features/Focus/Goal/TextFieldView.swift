@@ -9,18 +9,17 @@ import SwiftUI
 
 struct TextFieldView: View {
     
-    let title: String
-    let placeHolder: String
+    let inputType: GoalInputType
     @Binding var text: String
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(title)
+            Text(inputType.title)
                 .font(.customRegular(ofSize: 14))
                 .foregroundStyle(.gray)
             
             TextField(text: $text) {
-                Text(placeHolder)
+                Text(inputType.subtitle)
             }
             .textFieldStyle(.roundedBorder)
             .controlSize(.large)
