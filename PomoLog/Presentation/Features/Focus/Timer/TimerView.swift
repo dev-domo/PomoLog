@@ -159,10 +159,10 @@ extension TimerView {
             guard let fetchedPomodoroModel = realmManager.fetchById(id: pomodoroID, PomodoroModel.self) else {
                 return
             }
-            
             let _ = realmManager.update(model: fetchedPomodoroModel) {
                 fetchedPomodoroModel.summaries.append(summaryModel)
             }
+            initSummary()
         }
     }
     
@@ -188,5 +188,9 @@ extension TimerView {
         let _ = realmManager.update(model: fetchedPomodoroModel) {
             fetchedPomodoroModel.focusTime += FocusStep.focusTime - remainingTime
         }
+    }
+    
+    private func initSummary() {
+        summary = ""
     }
 }
