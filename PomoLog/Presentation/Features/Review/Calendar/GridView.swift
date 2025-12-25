@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CalendarGridView: View {
+struct GridView: View {
     
     private let pomodoroRealmManager = PomodoroRealmManager()
     
@@ -36,7 +36,7 @@ struct CalendarGridView: View {
     }
 }
 
-extension CalendarGridView {
+extension GridView {
     
     private func numberOfDays(in date: Date) -> Int {
         return Calendar.current.range(of: .day, in: .month, for: date)?.count ?? 0
@@ -60,7 +60,7 @@ extension CalendarGridView {
             let clicked = clickedDate == date
             let hasPomodoro = hasPomodoro(date: date)
             
-            CalendarCellView(
+            CellView(
                 day: day,
                 clicked: clicked,
                 hasPomodoro: hasPomodoro

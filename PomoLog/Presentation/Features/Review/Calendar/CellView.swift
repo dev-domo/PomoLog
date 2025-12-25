@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CalendarCellView: View {
+struct CellView: View {
     
     let day: Int
     let clicked: Bool
@@ -25,8 +25,8 @@ struct CalendarCellView: View {
                 )
             
             Rectangle()
-                .frame(width: 10, height: 2)
-                .foregroundStyle(.black)
+                .frame(width: 14, height: 4)
+                .foregroundStyle(.enableStart)
                 .opacity(hasPomodoro ? 1 : 0)
         }
     }

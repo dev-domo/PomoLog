@@ -9,7 +9,7 @@ import SwiftUI
 
 import RealmSwift
 
-struct GoalView: View {
+struct PomodoroGoalView: View {
     
     let selectTabAction: (Int) -> Void
     private let dateFormatter: DateFormatter = {

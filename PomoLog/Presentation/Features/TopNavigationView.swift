@@ -13,7 +13,7 @@ struct TopNavigationView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            GoalView(selectTabAction: { index in
+            PomodoroGoalView(selectTabAction: { index in
                 selectedTab = index
             })
             .tabItem {
@@ -22,7 +22,7 @@ struct TopNavigationView: View {
             }
             .tag(0)
             
-            CalendarView(month: Date())
+            ReviewView(month: Date())
                 .tabItem {
                     Image(systemName: "book")
                     Text("돌아보기")

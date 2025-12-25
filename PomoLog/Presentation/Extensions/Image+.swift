@@ -15,4 +15,5 @@ extension Image {
     static let stop = Image(systemName: "stop.fill")
     static let previous = Image(systemName: "arrow.backward.circle")
     static let next = Image(systemName: "arrow.forward.circle")
+    static let dropDown = Image(systemName: "arrowtriangle.down.circle")
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CalendarView: View {
+struct ReviewView: View {
     
     private let dragToLeft: CGFloat = -100
     private let dragToRight: CGFloat = 100
@@ -21,12 +21,11 @@ struct CalendarView: View {
             Color.white.ignoresSafeArea()
             
             HStack {
-                VStack {
-                    CalendarHeaderView(month: $month)
-                    CalendarGridView(month: $month, clickedDate: $clickedDate)
-                }
-                
-                TimelineView(clickedDate: $clickedDate)
+                CalendarView(
+                    month: $month,
+                    clickedDate: $clickedDate
+                )
+                RecordView(clickedDate: $clickedDate)
             }
         }
         .gesture(
@@ -48,7 +47,7 @@ struct CalendarView: View {
     }
 }
 
-private extension CalendarView {
+private extension ReviewView {
     
     private func initOffset(_ offset: CGSize = CGSize()) {
         self.offset = offset
