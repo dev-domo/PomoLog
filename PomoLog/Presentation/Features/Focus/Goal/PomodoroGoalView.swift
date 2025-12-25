@@ -9,7 +9,7 @@ import SwiftUI
 
 import RealmSwift
 
-struct GoalView: View {
+struct PomodoroGoalView: View {
     
     let selectTabAction: (Int) -> Void
     private let dateFormatter: DateFormatter = {
@@ -76,7 +76,7 @@ struct GoalView: View {
                         savePomodoro()
                     } label: {
                         HStack(spacing: 10) {
-                            Image(systemName: "play.fill")
+                            Image.play
                                 .font(.headline)
                             Text("시작하기")
                                 .font(.customSemiBold(ofSize: 14))
@@ -110,7 +110,7 @@ struct GoalView: View {
     }
     
     private func savePomodoro() {
-        let realmManager = RealmManager()
+        let realmManager = PomodoroRealmManager()
         
         let pomodoro = PomodoroModel()
         pomodoro.goal = goal

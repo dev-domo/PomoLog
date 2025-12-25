@@ -7,7 +7,9 @@
 
 import RealmSwift
 
-protocol DataBase {
+protocol Database {
+    
+    var realm: Realm? { get }
     
     func save<T: Object>(model: T) -> Bool
     func update<T: Object>(model: T, action: () -> Void) -> Bool

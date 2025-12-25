@@ -55,7 +55,7 @@ struct TimerView: View {
             if !isEnabled {
                 TimerButton(
                     action: { startTimer() },
-                    imageName: "play.fill"
+                    image: .play
                 )
             } else {
                 if focusStep == .focusSummary {
@@ -89,7 +89,7 @@ struct TimerView: View {
                     HStack(spacing: 16) {
                         TimerButton(
                             action: { stopTimer() },
-                            imageName: "pause.fill"
+                            image: .pause
                         )
                         
                         TimerButton(
@@ -100,7 +100,7 @@ struct TimerView: View {
                                 }
                                 selectTabAction(1)
                             },
-                            imageName: "stop.fill"
+                            image: .stop
                         )
                     }
                 }
@@ -108,6 +108,9 @@ struct TimerView: View {
         }
         .frame(minWidth: 600, alignment: .center)
     }
+}
+
+extension TimerView {
     
     private func formatTime(_ time: Int) -> String {
         let minutes = time / seconds
@@ -145,7 +148,7 @@ struct TimerView: View {
     }
     
     private func saveSummary() {
-        let realmManager = RealmManager()
+        let realmManager = PomodoroRealmManager()
         
         let summaryModel = SummaryModel()
         summaryModel.content = summary
@@ -164,7 +167,7 @@ struct TimerView: View {
     }
     
     private func updateFocusTime() {
-        let realmManager = RealmManager()
+        let realmManager = PomodoroRealmManager()
         
         guard let fetchedPomodoroModel = realmManager.fetchById(id: pomodoroID, PomodoroModel.self) else {
             return
@@ -176,7 +179,7 @@ struct TimerView: View {
     }
     
     private func updateFocusTime(remainingTime: Int) {
-        let realmManager = RealmManager()
+        let realmManager = PomodoroRealmManager()
         
         guard let fetchedPomodoroModel = realmManager.fetchById(id: pomodoroID, PomodoroModel.self) else {
             return

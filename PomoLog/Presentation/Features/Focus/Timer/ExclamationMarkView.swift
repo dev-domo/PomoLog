@@ -1,5 +1,5 @@
 //
-//  QuestionMarkView.swift
+//  ExclamationMarkView.swift
 //  PomoLog
 //
 //  Created by APPLE on 12/17/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct QuestionMarkView: View {
+struct ExclamationMarkView: View {
     
     @Binding var showPopUp: Bool
     let goal: String
@@ -16,7 +16,7 @@ struct QuestionMarkView: View {
         Button {
             showPopUp = true
         } label: {
-            Image(systemName: "questionmark.circle.fill")
+            Image.exclamation
                 .frame(width: 50)
                 .foregroundStyle(.gray)
         }

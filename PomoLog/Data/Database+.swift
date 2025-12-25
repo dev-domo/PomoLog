@@ -1,19 +1,13 @@
 //
-//  RealmManager.swift
+//  DataBase+.swift
 //  PomoLog
 //
-//  Created by APPLE on 12/18/25.
+//  Created by APPLE on 12/22/25.
 //
 
 import RealmSwift
 
-final class RealmManager: DataBase {
-    
-    private let realm: Realm?
-    
-    init(realm: Realm? = RealmFactory.shared.createRealm()) {
-        self.realm = realm
-    }
+extension Database {
     
     func save<T>(model: T) -> Bool where T : Object {
         let result: ()? = try? realm?.write {
