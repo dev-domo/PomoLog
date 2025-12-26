@@ -22,19 +22,6 @@ struct TimerView: View {
     
     @State var timer: Timer?
     @State var isEnabled: Bool = false
-
-    init(
-        cycle: Binding<Cycle>,
-        focusStep: Binding<FocusStep>,
-        selectTabAction: @escaping (Int) -> Void,
-        pomodoroID: ObjectId
-    ) {
-        self._cycle = cycle
-        self._focusStep = focusStep
-        self._remainingTime = State(initialValue: focusStep.wrappedValue.totalTime)
-        self.selectTabAction = selectTabAction
-        self.pomodoroID = pomodoroID
-    }
     
     var body: some View {
         VStack {
