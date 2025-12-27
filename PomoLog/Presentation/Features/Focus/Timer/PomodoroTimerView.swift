@@ -11,12 +11,23 @@ import RealmSwift
 
 struct PomodoroTimerView: View {
     
-    @State var cycle: Cycle
-    @State var focusStep: FocusStep
     @State var showPopUp: Bool = false
+    @ObservedObject var timerManager: TimerManager
+    
     let goal: String
     let selectTabAction: (Int) -> Void
     let pomodoroID: ObjectId
+    
+    init(
+        goal: String,
+        selectTabAction: @escaping (Int) -> Void,
+        pomodoroID: ObjectId
+    ) {
+        self.goal = goal
+        self.selectTabAction = selectTabAction
+        self.pomodoroID = pomodoroID
+        self._timerManager = ObservedObject(wrappedValue: TimerManager(pomodoroID: pomodoroID))
+    }
     
     var body: some View {
         ZStack {
@@ -25,13 +36,12 @@ struct PomodoroTimerView: View {
             ZStack {
                 VStack {
                     HStack {
-                        ProgressBarView(cycle: $cycle, goal: goal)
+                        ProgressBarView(timerManager: timerManager, goal: goal)
                         ExclamationMarkView(showPopUp: $showPopUp, goal: goal)
                     }
-                    FocusStepView(focusStep: $focusStep)
+                    FocusStepView(timerManager: timerManager)
                     TimerView(
-                        cycle: $cycle,
-                        focusStep: $focusStep,
+                        timerManager: timerManager,
                         selectTabAction: selectTabAction,
                         pomodoroID: pomodoroID
                     )

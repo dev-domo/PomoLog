@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FocusStepView: View {
     
-    @Binding var focusStep: FocusStep
+    @ObservedObject var timerManager: TimerManager
     
     var body: some View {
         HStack(spacing: 0) {
@@ -17,7 +17,9 @@ struct FocusStepView: View {
                 HStack(spacing: 0) {
                     ZStack {
                         Circle()
-                            .fill(index <= focusStep.rawValue ? focusStep.color : .lightGray)
+                            .fill(
+                                index <= timerManager.focusStep.rawValue ? timerManager.focusStep.color : .lightGray
+                            )
                             .frame(width: 20, height: 20)
                         
                         Text("\(index + 1)")
@@ -28,7 +30,9 @@ struct FocusStepView: View {
                     if index < 2 {
                         Rectangle()
                             .frame(width: 50, height: 2)
-                            .foregroundStyle(index <= focusStep.rawValue ? focusStep.color : .lightGray)
+                            .foregroundStyle(
+                                index <= timerManager.focusStep.rawValue ? timerManager.focusStep.color : .lightGray
+                            )
                     }
                 }
             }

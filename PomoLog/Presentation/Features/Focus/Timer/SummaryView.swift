@@ -12,8 +12,8 @@ import RealmSwift
 struct SummaryView: View {
     
     @State var summary: String = ""
-    @Binding var focusStep: FocusStep
-    @Binding var remainingTime: Int
+    @ObservedObject var timerManager: TimerManager
+    
     let pomodoroID: ObjectId
     
     var body: some View {
@@ -23,8 +23,8 @@ struct SummaryView: View {
                 .frame(height: 40)
             
             Button {
-                focusStep = PomodoroSchedular.shared.getNextStep()
-                remainingTime = focusStep.totalTime
+                timerManager.focusStep = PomodoroSchedular.shared.getNextStep()
+                timerManager.remainingTime = timerManager.focusStep.totalTime
                 saveSummary()
             } label: {
                 HStack {

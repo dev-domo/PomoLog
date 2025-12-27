@@ -89,8 +89,6 @@ struct PomodoroGoalView: View {
                     .disabled(!canMoveToTimer)
                     .navigationDestination(isPresented: $shouldNavigate) {
                         PomodoroTimerView(
-                            cycle: .first,
-                            focusStep: .focus,
                             goal: $goal.wrappedValue,
                             selectTabAction: selectTabAction,
                             pomodoroID: pomodoroID

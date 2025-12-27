@@ -11,25 +11,26 @@ import RealmSwift
 
 struct StopTimerView: View {
     
-    @Binding var focusStep: FocusStep
-    @Binding var remainingTime: Int
-    @Binding var isEnabled: Bool
-    @Binding var timer: Timer?
+    @ObservedObject var timerManager: TimerManager
+    
     let pomodoroID: ObjectId
     let selectTabAction: (Int) -> Void
     
     var body: some View {
         HStack(spacing: 16) {
             TimerButton(
-                action: { stopTimer() },
+                action: { timerManager.stopTimer() },
                 image: .pause
             )
             
             TimerButton(
                 action: {
-                    stopTimer()
-                    if focusStep == .focus {
-                        updateFocusTime(remainingTime: remainingTime)
+                    timerManager.stopTimer()
+                    PomodoroSchedular.shared.initCounter()
+                    PomodoroSchedular.shared.increaseFocusCounter()
+                    
+                    if timerManager.focusStep == .focus {
+                        updateFocusTime(remainingTime: timerManager.remainingTime)
                     }
                     selectTabAction(1)
                 },
@@ -40,12 +41,6 @@ struct StopTimerView: View {
 }
 
 extension StopTimerView {
-    
-    private func stopTimer() {
-        isEnabled = false
-        timer?.invalidate()
-        timer = nil
-    }
     
     private func updateFocusTime(remainingTime: Int) {
         let realmManager = PomodoroRealmManager()
