@@ -17,14 +17,12 @@ struct TopNavigationView: View {
                 selectedTab = index
             })
             .tabItem {
-                Image(systemName: "timer")
                 Text("타이머")
             }
             .tag(0)
             
             ReviewView(month: Date())
                 .tabItem {
-                    Image(systemName: "book")
                     Text("돌아보기")
                 }
                 .tag(1)
