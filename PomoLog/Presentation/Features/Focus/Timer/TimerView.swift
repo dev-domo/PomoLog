@@ -47,7 +47,8 @@ struct TimerView: View {
             if !timerManager.isEnabled {
                 TimerButton(
                     action: { timerManager.startTimer() },
-                    image: .play
+                    image: .play,
+                    color: timerManager.focusStep.color
                 )
             } else {
                 if timerManager.focusStep == .focusSummary {

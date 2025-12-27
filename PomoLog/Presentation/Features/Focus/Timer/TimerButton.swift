@@ -11,13 +11,16 @@ struct TimerButton: View {
     
     let action: () -> Void
     let image: Image
+    let color: Color
     
     init(
         action: @escaping () -> Void,
-        image: Image
+        image: Image,
+        color: Color
     ) {
         self.action = action
         self.image = image
+        self.color = color
     }
     
     var body: some View {
@@ -26,7 +29,7 @@ struct TimerButton: View {
         } label: {
             ZStack {
                 Circle()
-                    .stroke(.lightGray, lineWidth: 4)
+                    .stroke(color, lineWidth: 4)
                     .frame(width: 40, height: 40)
                 
                 image
@@ -34,6 +37,6 @@ struct TimerButton: View {
             }
         }
         .buttonStyle(PlainButtonStyle())
-        .foregroundStyle(.lightGray)
+        .foregroundStyle(color)
     }
 }

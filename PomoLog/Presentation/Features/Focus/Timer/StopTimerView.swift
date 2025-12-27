@@ -20,7 +20,8 @@ struct StopTimerView: View {
         HStack(spacing: 16) {
             TimerButton(
                 action: { timerManager.stopTimer() },
-                image: .pause
+                image: .pause,
+                color: timerManager.focusStep.color
             )
             
             TimerButton(
@@ -34,7 +35,8 @@ struct StopTimerView: View {
                     }
                     selectTabAction(1)
                 },
-                image: .stop
+                image: .stop,
+                color: timerManager.focusStep.color
             )
         }
     }
