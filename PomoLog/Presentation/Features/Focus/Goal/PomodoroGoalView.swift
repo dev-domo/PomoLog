@@ -11,7 +11,6 @@ import RealmSwift
 
 struct PomodoroGoalView: View {
     
-    let selectTabAction: (Int) -> Void
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy년 MM월 dd일"
@@ -24,6 +23,10 @@ struct PomodoroGoalView: View {
     @State private var output: String = ""
     @State private var shouldNavigate: Bool = false
     @State private var pomodoroID: ObjectId = ObjectId()
+    @State private var finalGoal: String = ""
+    
+    let selectTabAction: (Int) -> Void
+    
     private var canMoveToTimer: Bool {
         !goal.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         && !csf.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
