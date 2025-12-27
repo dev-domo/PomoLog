@@ -92,7 +92,7 @@ struct PomodoroGoalView: View {
                     .disabled(!canMoveToTimer)
                     .navigationDestination(isPresented: $shouldNavigate) {
                         PomodoroTimerView(
-                            goal: $goal.wrappedValue,
+                            goal: finalGoal,
                             selectTabAction: selectTabAction,
                             pomodoroID: pomodoroID
                         )
@@ -118,6 +118,7 @@ extension PomodoroGoalView {
         let isSaved = realmManager.save(model: pomodoro)
         if isSaved {
             shouldNavigate = true
+            finalGoal = goal
             initInformation()
         }
     }
