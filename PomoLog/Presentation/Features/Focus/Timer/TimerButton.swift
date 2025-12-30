@@ -38,5 +38,6 @@ struct TimerButton: View {
         }
         .buttonStyle(PlainButtonStyle())
         .foregroundStyle(color)
+        .frame(height: 40)
     }
 }

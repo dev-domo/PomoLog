@@ -39,6 +39,7 @@ struct StopTimerView: View {
                 color: timerManager.focusStep.color
             )
         }
+        .frame(height: 40)
     }
 }
 

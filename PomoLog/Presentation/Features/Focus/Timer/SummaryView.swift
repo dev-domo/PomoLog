@@ -20,7 +20,6 @@ struct SummaryView: View {
         HStack(spacing: 16) {
             TextField("어떤 일을 수행하셨나요?", text: $summary)
                 .textFieldStyle(.roundedBorder)
-                .frame(height: 40)
             
             Button {
                 timerManager.focusStep = PomodoroSchedular.shared.getNextStep()
@@ -40,9 +39,8 @@ struct SummaryView: View {
             .buttonStyle(PlainButtonStyle())
             .shadow(radius: 1)
             .disabled(summary.isEmpty)
-            .frame(height: 40)
         }
-        .frame(width: 500)
+        .frame(width: 500, height: 40)
     }
 }
 
