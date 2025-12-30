@@ -7,27 +7,35 @@
 
 import SwiftUI
 
+import RealmSwift
+
 struct TopNavigationView: View {
     
     @State private var selectedTab: Int = 0
+    @StateObject private var timerManager = TimerManager(pomodoroID: ObjectId())
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            PomodoroGoalView(selectTabAction: { index in
-                selectedTab = index
-            })
+            PomodoroGoalView(
+                selectTabAction: { index in
+                    selectedTab = index
+                },
+                timerManager: timerManager)
             .tabItem {
-                Image(systemName: "timer")
                 Text("타이머")
             }
             .tag(0)
             
             ReviewView(month: Date())
                 .tabItem {
-                    Image(systemName: "book")
                     Text("돌아보기")
                 }
                 .tag(1)
+        }
+        .onChange(of: selectedTab) { oldValue, newValue in
+            if oldValue == 0 && newValue == 1 {
+                timerManager.stopTimer()
+            }
         }
     }
 }

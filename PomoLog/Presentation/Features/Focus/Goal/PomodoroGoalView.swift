@@ -11,7 +11,6 @@ import RealmSwift
 
 struct PomodoroGoalView: View {
     
-    let selectTabAction: (Int) -> Void
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy년 MM월 dd일"
@@ -24,14 +23,23 @@ struct PomodoroGoalView: View {
     @State private var output: String = ""
     @State private var shouldNavigate: Bool = false
     @State private var pomodoroID: ObjectId = ObjectId()
+    @State private var finalGoal: String = ""
+    
+    let selectTabAction: (Int) -> Void
+    @ObservedObject var timerManager: TimerManager
+    
     private var canMoveToTimer: Bool {
         !goal.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         && !csf.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         && !output.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
     
-    init(selectTabAction: @escaping (Int) -> Void) {
+    init(
+        selectTabAction: @escaping (Int) -> Void,
+        timerManager: TimerManager
+    ) {
         self.selectTabAction = selectTabAction
+        self.timerManager = timerManager
     }
     
     var body: some View {
@@ -43,7 +51,7 @@ struct PomodoroGoalView: View {
                     Spacer(minLength: 40)
                     
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("집중할 목표를 설정해보세요")
+                        Text("어떤 목표를 달성할까요?")
                             .font(.customSemiBold(ofSize: 24))
                             .foregroundColor(.mainText)
                     }
@@ -52,20 +60,17 @@ struct PomodoroGoalView: View {
                     
                     VStack(alignment: .leading, spacing: 16) {
                         TextFieldView(
-                            title: "목표",
-                            placeHolder: "이번 포모도로 동안 어떤 목표를 달성할 건가요?",
+                            inputType: .goal,
                             text: $goal
                         )
                         
                         TextFieldView(
-                            title: "핵심 성공 요인",
-                            placeHolder: "목표 달성을 위한 핵심 성공 요인은 무엇인가요?",
+                            inputType: .csf,
                             text: $csf
                         )
                         
                         TextFieldView(
-                            title: "아웃풋",
-                            placeHolder: "목표를 달성하면 어떤 결과물이 나올까요?",
+                            inputType: .output,
                             text: $output
                         )
                     }
@@ -92,11 +97,10 @@ struct PomodoroGoalView: View {
                     .disabled(!canMoveToTimer)
                     .navigationDestination(isPresented: $shouldNavigate) {
                         PomodoroTimerView(
-                            cycle: .first,
-                            focusStep: .focus,
-                            goal: $goal.wrappedValue,
+                            goal: finalGoal,
                             selectTabAction: selectTabAction,
-                            pomodoroID: pomodoroID
+                            pomodoroID: pomodoroID,
+                            timerManager: timerManager
                         )
                     }
                     
@@ -108,20 +112,37 @@ struct PomodoroGoalView: View {
             }
         }
     }
+}
+
+extension PomodoroGoalView {
     
     private func savePomodoro() {
         let realmManager = PomodoroRealmManager()
-        
-        let pomodoro = PomodoroModel()
-        pomodoro.goal = goal
-        pomodoro.csf = csf
-        pomodoro.output = output
-        pomodoro.dateString = dateFormatter.string(from: pomodoro.timestamp)
+        let pomodoro = configurePomodoro()
         pomodoroID = pomodoro.id
         
         let isSaved = realmManager.save(model: pomodoro)
         if isSaved {
             shouldNavigate = true
+            finalGoal = goal
+            initInformation()
+            timerManager.setUpPomodoroID(pomodoroID)
         }
+    }
+    
+    private func configurePomodoro() -> PomodoroModel {
+        let pomodoro = PomodoroModel()
+        pomodoro.goal = goal
+        pomodoro.csf = csf
+        pomodoro.output = output
+        pomodoro.dateString = dateFormatter.string(from: pomodoro.timestamp)
+        
+        return pomodoro
+    }
+    
+    private func initInformation() {
+        goal = ""
+        csf = ""
+        output = ""
     }
 }

@@ -39,13 +39,13 @@ final class PomodoroSchedular {
         return .focus
     }
     
-    private func initCounter() {
+    func initCounter() {
         focusCounter = initValue
         focusSummaryCounter = initValue
         shortBreakCounter = initValue
     }
     
-    private func increaseFocusCounter() {
+    func increaseFocusCounter() {
         focusCounter += step
     }
     

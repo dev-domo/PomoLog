@@ -10,7 +10,8 @@ import SwiftUI
 struct ProgressBarView: View {
     
     @State private var showPopUp: Bool = false
-    @Binding var cycle: Cycle
+    @ObservedObject var timerManager: TimerManager
+    
     let goal: String
     
     var body: some View {
@@ -18,7 +19,7 @@ struct ProgressBarView: View {
             ForEach(0..<Cycle.allCases.count) { index in
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: 50, height: 10)
-                    .foregroundStyle(index <= cycle.rawValue ? .gray : .lightGray)
+                    .foregroundStyle(index <= timerManager.cycle.rawValue ? .gray : .lightGray)
             }
         }
         .padding(.vertical, 10)
