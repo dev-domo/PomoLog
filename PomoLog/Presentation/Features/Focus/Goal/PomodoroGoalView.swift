@@ -26,6 +26,7 @@ struct PomodoroGoalView: View {
     @State private var finalGoal: String = ""
     
     let selectTabAction: (Int) -> Void
+    @ObservedObject var timerManager: TimerManager
     
     private var canMoveToTimer: Bool {
         !goal.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -33,8 +34,12 @@ struct PomodoroGoalView: View {
         && !output.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
     
-    init(selectTabAction: @escaping (Int) -> Void) {
+    init(
+        selectTabAction: @escaping (Int) -> Void,
+        timerManager: TimerManager
+    ) {
         self.selectTabAction = selectTabAction
+        self.timerManager = timerManager
     }
     
     var body: some View {
@@ -94,7 +99,8 @@ struct PomodoroGoalView: View {
                         PomodoroTimerView(
                             goal: finalGoal,
                             selectTabAction: selectTabAction,
-                            pomodoroID: pomodoroID
+                            pomodoroID: pomodoroID,
+                            timerManager: timerManager
                         )
                     }
                     
@@ -120,6 +126,7 @@ extension PomodoroGoalView {
             shouldNavigate = true
             finalGoal = goal
             initInformation()
+            timerManager.setUpPomodoroID(pomodoroID)
         }
     }
     

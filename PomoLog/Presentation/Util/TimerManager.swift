@@ -18,7 +18,7 @@ final class TimerManager: ObservableObject {
     @Published var isEnabled: Bool = false
     
     private var timer: Timer?
-    private let pomodoroID: ObjectId
+    private var pomodoroID: ObjectId
     
     init(pomodoroID: ObjectId) {
         self.pomodoroID = pomodoroID
@@ -53,6 +53,10 @@ final class TimerManager: ObservableObject {
         isEnabled = false
         timer?.invalidate()
         timer = nil
+    }
+    
+    func setUpPomodoroID(_ id: ObjectId) {
+        self.pomodoroID = id
     }
     
     private func updateFocusTime() {

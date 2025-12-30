@@ -21,12 +21,13 @@ struct PomodoroTimerView: View {
     init(
         goal: String,
         selectTabAction: @escaping (Int) -> Void,
-        pomodoroID: ObjectId
+        pomodoroID: ObjectId,
+        timerManager: TimerManager
     ) {
         self.goal = goal
         self.selectTabAction = selectTabAction
         self.pomodoroID = pomodoroID
-        self._timerManager = ObservedObject(wrappedValue: TimerManager(pomodoroID: pomodoroID))
+        self.timerManager = timerManager
     }
     
     var body: some View {
