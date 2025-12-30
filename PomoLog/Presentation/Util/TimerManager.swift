@@ -37,15 +37,8 @@ final class TimerManager: ObservableObject {
                 return
             }
             
-            focusStep = PomodoroSchedular.shared.getNextStep()
-            remainingTime = focusStep.totalTime
-            
-            if focusStep == .focus {
-                cycle = cycle.update()
-            }
-            if focusStep == .focusSummary {
-                updateFocusTime()
-            }
+            updateFocusStep()
+            activateApp()
         }
     }
     
@@ -59,6 +52,24 @@ final class TimerManager: ObservableObject {
         self.pomodoroID = id
     }
     
+    private func updateFocusStep() {
+        focusStep = PomodoroSchedular.shared.getNextStep()
+        remainingTime = focusStep.totalTime
+        
+        actionByFocusStep(target: focusStep)
+    }
+    
+    private func actionByFocusStep(target focusStep: FocusStep) {
+        switch focusStep {
+        case .focus:
+            cycle = cycle.update()
+        case .focusSummary:
+            updateFocusTime()
+        case .shortBreak, .longBreak:
+            break
+        }
+    }
+    
     private func updateFocusTime() {
         let realmManager = PomodoroRealmManager()
         
@@ -69,5 +80,10 @@ final class TimerManager: ObservableObject {
         let _ = realmManager.update(model: fetchedPomodoroModel) {
             fetchedPomodoroModel.focusTime += FocusStep.focusTime
         }
+    }
+    
+    private func activateApp() {
+        NSApp.activate(ignoringOtherApps: true)
+        NSApp.windows.forEach { $0.makeKeyAndOrderFront(nil) }
     }
 }
