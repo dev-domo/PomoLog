@@ -51,7 +51,7 @@ struct PomodoroGoalView: View {
                     Spacer(minLength: 40)
                     
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("집중의 목표를 설정해보세요")
+                        Text("어떤 목표를 달성할까요?")
                             .font(.customSemiBold(ofSize: 24))
                             .foregroundColor(.mainText)
                     }
