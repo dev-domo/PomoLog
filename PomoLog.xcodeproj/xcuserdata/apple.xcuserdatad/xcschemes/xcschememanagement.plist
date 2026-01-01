@@ -4,15 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>GettingStarted (Playground) 1.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>GettingStarted (Playground).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<key>PomoLog.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<key>PomoLogTest.xcscheme_^#shared#^_</key>
 		<dict>
@@ -22,6 +27,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>1802247D2EE4602C00EFBD70</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>18773FE52EF3D5BA006215C7</key>
 		<dict>
 			<key>primary</key>
