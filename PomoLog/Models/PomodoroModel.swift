@@ -9,7 +9,7 @@ import Foundation
 
 import RealmSwift
 
-final class PomodoroModel: Object {
+final class PomodoroModel: Object, Identifiable {
     
     // @objc dynamic -> @Persisted (프로퍼티 래퍼)
     // id : Int -> ObjectId

@@ -12,18 +12,22 @@ struct PomodoroCardView: View {
     let index: Int
     let pomodoro: PomodoroModel
     let formattedTime: String
+    var onRemove: () -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             PomodoroCardHeaderView(
                 index: index,
-                formattedTime: formattedTime
+                formattedTime: formattedTime,
+                pomodoroID: pomodoro.id,
+                onRemove: onRemove
             )
             
             GoalAndSummariesView(
                 goal: pomodoro.goal,
                 summaries: pomodoro.summaries
             )
+            .padding(.top, 8)
             .padding([.horizontal, .bottom], 16)
         }
         .background(Color.white)

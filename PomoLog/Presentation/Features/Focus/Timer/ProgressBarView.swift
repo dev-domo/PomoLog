@@ -16,7 +16,7 @@ struct ProgressBarView: View {
     
     var body: some View {
         HStack(spacing: 10) {
-            ForEach(0..<Cycle.allCases.count) { index in
+            ForEach(0..<Cycle.allCases.count, id: \.self) { index in
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: 50, height: 10)
                     .foregroundStyle(index <= timerManager.cycle.rawValue ? .gray : .lightGray)

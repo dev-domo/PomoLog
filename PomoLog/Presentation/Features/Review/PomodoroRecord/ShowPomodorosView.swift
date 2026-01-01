@@ -16,6 +16,7 @@ struct ShowPomodorosView: View {
     private let hourUnit: String = "시간"
     private let minuteUnit: String = "분"
     private let secondUnit: String = "초"
+    @State private var refreshID = UUID()
     
     let pomodoros: Results<PomodoroModel>
     
@@ -26,10 +27,12 @@ struct ShowPomodorosView: View {
                     PomodoroCardView(
                         index: index,
                         pomodoro: pomodoro,
-                        formattedTime: formatTime(pomodoro.focusTime)
-                    )
+                        formattedTime: formatTime(pomodoro.focusTime)) {
+                            refreshID = UUID()
+                        }
                 }
             }
+            .id(refreshID)
             .padding()
         }
         .background(.ultraThinMaterial)
