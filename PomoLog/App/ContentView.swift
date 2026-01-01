@@ -9,7 +9,7 @@ import SwiftUI
 
 import RealmSwift
 
-struct TopNavigationView: View {
+struct ContentView: View {
     
     @State private var selectedTab: Int = 0
     @StateObject private var timerManager = TimerManager(pomodoroID: ObjectId())
