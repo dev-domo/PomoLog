@@ -18,7 +18,7 @@ struct FocusStepView: View {
                     ZStack {
                         Circle()
                             .fill(
-                                index <= timerManager.focusStep.rawValue ? timerManager.focusStep.color : .lightGray
+                                index <= timerManager.focusStep.rawValue ? timerManager.focusStep.color : .pomologLightGray
                             )
                             .frame(width: 20, height: 20)
                         
@@ -31,7 +31,7 @@ struct FocusStepView: View {
                         Rectangle()
                             .frame(width: 50, height: 2)
                             .foregroundStyle(
-                                index <= timerManager.focusStep.rawValue ? timerManager.focusStep.color : .lightGray
+                                index <= timerManager.focusStep.rawValue ? timerManager.focusStep.color : .pomologLightGray
                             )
                     }
                 }

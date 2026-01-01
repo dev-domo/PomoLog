@@ -19,7 +19,7 @@ struct ProgressBarView: View {
             ForEach(0..<Cycle.allCases.count, id: \.self) { index in
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: 50, height: 10)
-                    .foregroundStyle(index <= timerManager.cycle.rawValue ? .gray : .lightGray)
+                    .foregroundStyle(index <= timerManager.cycle.rawValue ? .gray : .pomologLightGray)
             }
         }
         .padding(.vertical, 10)
