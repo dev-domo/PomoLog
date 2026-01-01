@@ -28,7 +28,7 @@ struct GridView: View {
                 let daysInMonth = numberOfDays(in: self.month)
                 let firstWeekDay = firstWeekdayOfMonth(in: self.month) - 1
                 
-                ForEach(0 ..< daysInMonth + firstWeekDay, id: \.self) {
+                ForEach(0..<daysInMonth + firstWeekDay, id: \.self) {
                     initCalendarCell(index: $0, firstWeekday: firstWeekDay)
                 }
             }
